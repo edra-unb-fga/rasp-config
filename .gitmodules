@@ -1,0 +1,9 @@
+[submodule "realsense-docker"]
+	path = realsense-docker
+	url = https://github.com/edra-unb-fga/realsense-docker.git
+[submodule "ros_humble_docker"]
+	path = ros_humble_docker
+	url = https://github.com/edra-unb-fga/ros_humble_docker.git
+[submodule "uxrce-docker"]
+	path = uxrce-docker
+	url = https://github.com/edra-unb-fga/uxrce-docker.git
