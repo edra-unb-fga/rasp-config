@@ -1,4 +1,4 @@
-version: '3'
+Version: '3'
 services:
   camera:
     image: t265_container
