@@ -31,6 +31,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /dev:/dev
+      - ./ros2_ws:/root/ros2_ws  # Volume para salvar localmente o workspace ROS2
     environment:
       - DISPLAY=$DISPLAY
       - QT_X11_NO_MITSHM=1
