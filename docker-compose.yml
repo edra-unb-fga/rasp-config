@@ -1,7 +1,9 @@
 version: '3.8'
 services:
   camera:
-    image: t265_container
+    build:
+      context: ./realsense-docker
+      dockerfile: Dockerfile
     container_name: t265_container
     privileged: true
     network_mode: "host"
@@ -9,18 +11,23 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /dev:/dev
     environment:
-      - DISPLAY=$DISPLAY
+      - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_LOCALHOST_ONLY=0
       - ROS_DOMAIN_ID=1
+      - HOST_IP=${HOST_IP}
+      - ROS_MASTER_URI=http://${HOST_IP}:11311
+      - ROS_IP=${HOST_IP}
     devices:
-      - /dev/ttyAMA0:/dev/ttyAMA0a
+      - /dev/ttyAMA0:/dev/ttyAMA0
       - /dev/ttyS0:/dev/ttyS0
     command: "ros2 launch realsense2_camera rs_launch.py enable_pose:=true camera_name:=t265 device_type:=t265 fisheye_width:=848 fisheye_height:=800 unite_imu_method:=linear_interpolation"
 
   ros2:
-    image: ros2_humble_image
+    build:
+      context: ./ros_humble_docker
+      dockerfile: Dockerfile
     container_name: ros2_humble_container
     privileged: true
     network_mode: "host"
@@ -28,18 +35,23 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /dev:/dev
     environment:
-      - DISPLAY=$DISPLAY
+      - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_LOCALHOST_ONLY=0
       - ROS_DOMAIN_ID=1
+      - HOST_IP=${HOST_IP}
+      - ROS_MASTER_URI=http://${HOST_IP}:11311
+      - ROS_IP=${HOST_IP}
     devices:
       - /dev/ttyAMA0:/dev/ttyAMA0
       - /dev/ttyS0:/dev/ttyS0
     command: bash -c "source /root/ros2_ws/install/local_setup.bash && ros2 run py_pubsub listener"
 
   micro_xrce_dds_agent:
-    image: micro_xrce_dds_agent_image
+    build:
+      context: ./uxrce-docker
+      dockerfile: Dockerfile
     container_name: micro_xrce_dds_agent_container
     privileged: true
     network_mode: "host"
@@ -47,11 +59,14 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /dev:/dev
     environment:
-      - DISPLAY=$DISPLAY
+      - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_LOCALHOST_ONLY=0
       - ROS_DOMAIN_ID=1
+      - HOST_IP=${HOST_IP}
+      - ROS_MASTER_URI=http://${HOST_IP}:11311
+      - ROS_IP=${HOST_IP}
     devices:
       - /dev/ttyAMA0:/dev/ttyAMA0
       - /dev/ttyS0:/dev/ttyS0
