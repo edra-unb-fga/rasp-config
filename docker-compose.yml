@@ -16,11 +16,10 @@ services:
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_LOCALHOST_ONLY=0
       - ROS_DOMAIN_ID=1
-      - HOST_IP=${HOST_IP}
     devices:
       - /dev/ttyAMA0:/dev/ttyAMA0
       - /dev/ttyS0:/dev/ttyS0
-    command: ["ros2 launch realsense2_camera rs_launch.py enable_pose:=true camera_name:=t265 device_type:=t265 fisheye_width:=848 fisheye_height:=800 unite_imu_method:=linear_interpolation"]
+    command: "ros2 launch realsense2_camera rs_launch.py enable_pose:=true camera_name:=t265 device_type:=t265 fisheye_width:=848 fisheye_height:=800 unite_imu_method:=linear_interpolation"
 
   ros2:
     build:
@@ -38,11 +37,10 @@ services:
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_LOCALHOST_ONLY=0
       - ROS_DOMAIN_ID=1
-      - HOST_IP=${HOST_IP}
     devices:
       - /dev/ttyAMA0:/dev/ttyAMA0
       - /dev/ttyS0:/dev/ttyS0
-    command: ["bash", "-c", "source /root/ros2_ws/install/local_setup.bash && ros2 run py_pubsub listener"]
+    command: bash -c "source /root/ros2_ws/install/local_setup.bash && ros2 run py_pubsub listener"
 
   micro_xrce_dds_agent:
     build:
@@ -60,8 +58,7 @@ services:
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_LOCALHOST_ONLY=0
       - ROS_DOMAIN_ID=1
-      - HOST_IP=${HOST_IP}
     devices:
       - /dev/ttyAMA0:/dev/ttyAMA0
       - /dev/ttyS0:/dev/ttyS0
-    command: ["sudo MicroXRCEAgent serial --dev /dev/ttyAMA0 -b 921600"]
+    command: "sudo MicroXRCEAgent serial --dev /dev/ttyAMA0 -b 921600"
