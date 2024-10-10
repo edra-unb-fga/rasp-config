@@ -15,7 +15,6 @@ services:
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_LOCALHOST_ONLY=0
-      - ROS_DOMAIN_ID=1
     devices:
       - /dev/ttyAMA0:/dev/ttyAMA0
       - /dev/ttyS0:/dev/ttyS0
@@ -36,7 +35,6 @@ services:
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_LOCALHOST_ONLY=0
-      - ROS_DOMAIN_ID=1
     devices:
       - /dev/ttyAMA0:/dev/ttyAMA0
       - /dev/ttyS0:/dev/ttyS0
@@ -57,7 +55,6 @@ services:
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_LOCALHOST_ONLY=0
-      - ROS_DOMAIN_ID=1
     devices:
       - /dev/ttyAMA0:/dev/ttyAMA0
       - /dev/ttyS0:/dev/ttyS0
